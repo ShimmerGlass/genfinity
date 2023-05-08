@@ -12,6 +12,7 @@ import { BinParams, makeBin } from "../lib/api";
 export const MakePage = () => {
   const [loading, setLoading] = useState(false);
   const [dirty, setDirty] = useState(true);
+  const [error, setError] = useState<string>();
   const [stlUrl, setStlUrl] = useState("");
   const [params, setParams] = useState<BinParams>({
     size_x: 1,
@@ -26,10 +27,13 @@ export const MakePage = () => {
 
   const make = async () => {
     try {
+      setError(undefined);
       setLoading(true);
       const res = await makeBin(params);
       setStlUrl(res.url);
       setDirty(false);
+    } catch (e: any) {
+      setError(e.message);
     } finally {
       setLoading(false);
     }
@@ -45,10 +49,17 @@ export const MakePage = () => {
         xs={8}
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        {dirty && !loading && (
+        {error && (
+          <Overlay sx={(theme) => ({ color: theme.palette.error.main })}>
+            {error}
+          </Overlay>
+        )}
+        {!error && dirty && !loading && (
           <Overlay>Click "Make" to generate your model</Overlay>
         )}
-        {loading && <Overlay>Loading... (this can take some time)</Overlay>}
+        {!error && loading && (
+          <Overlay>Loading... (this can take some time)</Overlay>
+        )}
         {stlUrl !== "" ? (
           <StlViewer
             url={stlUrl}

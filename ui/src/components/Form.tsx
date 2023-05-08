@@ -31,12 +31,20 @@ export const ControlSection = (props: {
 };
 
 export const Control = (props: { name: string; children: React.ReactNode }) => (
-  <Stack direction="row" spacing={2}>
-    <Typography id="input-slider" style={{ width: "40%" }}>
+  <Box
+    sx={(theme) => ({
+      display: "flex",
+      gap: theme.spacing(2),
+      marginBottom: theme.spacing(1),
+      justifyContent: "center",
+      alignItems: "center",
+    })}
+  >
+    <Typography id="input-slider" style={{ width: "40%", color: "#333" }}>
       {props.name}
     </Typography>
     <Box style={{ width: "60%" }}>{props.children}</Box>
-  </Stack>
+  </Box>
 );
 
 export const SliderControl = (props: {
