@@ -16,6 +16,32 @@ type Bin struct {
 }
 
 func (b Bin) Validate() error {
+	if err := validateBetween(b.SizeX, 1, 20); err != nil {
+		return fmt.Errorf("size_x: %w", err)
+	}
+	if err := validateBetween(b.SizeY, 1, 20); err != nil {
+		return fmt.Errorf("size_y: %w", err)
+	}
+	if err := validateBetween(b.SizeZ, 1, 20); err != nil {
+		return fmt.Errorf("size_z: %w", err)
+	}
+	if err := validateBetween(b.DivX, 0, 60); err != nil {
+		return fmt.Errorf("div_x: %w", err)
+	}
+	if err := validateBetween(b.DivY, 0, 60); err != nil {
+		return fmt.Errorf("div_y: %w", err)
+	}
+
+	if err := validateBetween(b.Tab, 0, 5); err != nil {
+		return fmt.Errorf("tab: %w", err)
+	}
+	if err := validateBetween(b.Scoop, 0, 1); err != nil {
+		return fmt.Errorf("scoop: %w", err)
+	}
+	if err := validateBetween(b.Lip, 0, 2); err != nil {
+		return fmt.Errorf("lip: %w", err)
+	}
+
 	return nil
 }
 

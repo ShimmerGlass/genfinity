@@ -13,10 +13,6 @@ import (
 	"github.com/shimmerglass/genfinity/config"
 )
 
-type Module interface {
-	Args() []string
-}
-
 type CAD struct {
 	cfg config.Config
 }
@@ -28,6 +24,10 @@ func New(cfg config.Config) *CAD {
 }
 
 func (c *CAD) Make(ctx context.Context, module Module) (string, error) {
+	if err := module.Validate(); err != nil {
+		return "", err
+	}
+
 	id := strings.Join(module.Args(), string(rune(0)))
 	h := sha256.Sum256([]byte(id))
 
