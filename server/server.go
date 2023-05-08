@@ -6,6 +6,7 @@ import (
 	"github.com/shimmerglass/genfinity/cad"
 	"github.com/shimmerglass/genfinity/config"
 	"github.com/shimmerglass/genfinity/ui"
+	"github.com/sirupsen/logrus"
 )
 
 type Server struct {
@@ -31,5 +32,6 @@ func (s *Server) Run() error {
 
 	mux.Handle("/", http.FileServer(uiFs))
 
+	logrus.Infof("listening on %s", s.cfg.Server.ListenAddr)
 	return http.ListenAndServe(s.cfg.Server.ListenAddr, mux)
 }
