@@ -18,17 +18,16 @@ RUN go build .
 
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y apt-transport-https ca-certificates wget
+RUN apt-get update && apt-get install -y apt-transport-https ca-certificates wget git
 RUN echo "deb https://download.opensuse.org/repositories/home:/t-paul/xUbuntu_22.04/ ./" > /etc/apt/sources.list.d/openscad.list
 RUN wget -qO- https://files.openscad.org/OBS-Repository-Key.pub > /etc/apt/trusted.gpg.d/obs-openscad-nightly.asc
 RUN apt-get update && apt-get install -y openscad-nightly
 
 RUN mkdir /app
-COPY --from=backend /app/genfinity /app
-RUN mkdir gridfinity 
-COPY --from=backend /app/gridfinity /app/gridfinity
+COPY --from=backend /app/genfinity /app 
 COPY etc/config.yaml /app
 WORKDIR /app
+RUN git clone https://github.com/kennetek/gridfinity-rebuilt-openscad.git gridfinity
 RUN mkdir stl
 
 EXPOSE 8888
