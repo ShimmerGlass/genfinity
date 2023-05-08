@@ -1,0 +1,6 @@
+[submodule "cad/gridfinity"]
+	path = cad/gridfinity
+	url = git@github.com:kennetek/gridfinity-rebuilt-openscad.git
+[submodule "gridfinity"]
+	path = gridfinity
+	url = git@github.com:kennetek/gridfinity-rebuilt-openscad.git

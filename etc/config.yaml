@@ -1,0 +1,8 @@
+server:
+  listen_addr: 0.0.0.0:8888
+
+stl:
+  path: stl/
+
+openscad:
+  path: openscad-nightly
