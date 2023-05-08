@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -10,7 +9,6 @@ import (
 
 func (s *Server) stl(rw http.ResponseWriter, r *http.Request) {
 	file := filepath.Base(r.URL.Path)
-	fmt.Println(file)
 	filePath := filepath.Join(s.cfg.STL.Path, file)
 
 	f, err := os.Open(filePath)

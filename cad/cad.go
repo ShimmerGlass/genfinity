@@ -11,15 +11,18 @@ import (
 	"strings"
 
 	"github.com/shimmerglass/genfinity/config"
+	"golang.org/x/sync/singleflight"
 )
 
 type CAD struct {
-	cfg config.Config
+	cfg     config.Config
+	sfGroup *singleflight.Group
 }
 
 func New(cfg config.Config) *CAD {
 	return &CAD{
-		cfg: cfg,
+		cfg:     cfg,
+		sfGroup: &singleflight.Group{},
 	}
 }
 
@@ -38,7 +41,9 @@ func (c *CAD) Make(ctx context.Context, module Module) (string, error) {
 		return fileName, nil
 	}
 
-	err := c.gen(ctx, module, filePath)
+	_, err, _ := c.sfGroup.Do(id, func() (interface{}, error) {
+		return nil, c.gen(ctx, module, filePath)
+	})
 	if err != nil {
 		return "", err
 	}
