@@ -49,6 +49,7 @@ func (c *CAD) Make(ctx context.Context, module Module) (string, error) {
 func (c *CAD) gen(ctx context.Context, module Module, path string) error {
 	args := []string{
 		"-o", path,
+		"--enable", "all",
 		"--export-format", "asciistl",
 	}
 
