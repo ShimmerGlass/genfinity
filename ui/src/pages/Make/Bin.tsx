@@ -84,24 +84,24 @@ export const BinControls = (props: { onChange: (params: any) => void }) => {
         <SelectControl
           name="Tab"
           value={params.tab}
-          options={{
-            0: "Full",
-            1: "Auto",
-            2: "Left",
-            3: "Center",
-            4: "Right",
-            5: "None",
-          }}
+          options={[
+            { value: 0, label: "Full" },
+            { value: 1, label: "Auto" },
+            { value: 2, label: "Left" },
+            { value: 3, label: "Center" },
+            { value: 4, label: "Right" },
+            { value: 5, label: "None" },
+          ]}
           onChange={(val) => setParams((current) => ({ ...current, tab: val }))}
         />
         <SelectControl
           name="Lip"
           value={params.lip}
-          options={{
-            0: "Regular lip",
-            1: "remove lip subtractively",
-            2: "Remove lip and retain height",
-          }}
+          options={[
+            { value: 0, label: "Regular lip" },
+            { value: 1, label: "remove lip subtractively" },
+            { value: 2, label: "Remove lip and retain height" },
+          ]}
           onChange={(val) => setParams((current) => ({ ...current, lip: val }))}
         />
         <SliderControl

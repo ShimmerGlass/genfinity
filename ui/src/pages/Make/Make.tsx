@@ -79,10 +79,10 @@ export const MakePage = () => {
           <SelectControl
             name="Type"
             value={modelType}
-            options={{
-              bin: "Bin",
-              frame: "Frame",
-            }}
+            options={[
+              { value: "bin", label: "Bin" },
+              { value: "frame", label: "Frame" },
+            ]}
             onChange={setModelType}
           />
         </ControlSection>
