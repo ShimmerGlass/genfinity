@@ -73,23 +73,26 @@ export const SliderControl = (props: {
   </Control>
 );
 
-export const SelectControl = (props: {
+export function SelectControl<T extends keyof any>(props: {
   name: string;
-  value: number;
-  options: { [key: number]: string };
-  onChange: (val: number) => void;
-}) => (
-  <Control name={props.name}>
-    <Select
-      value={props.value}
-      onChange={(e) => props.onChange(parseInt(e.target.value as string))}
-      size="small"
-    >
-      {Object.entries(props.options).map(([value, label]) => (
-        <MenuItem key={value} value={value}>
-          {label}
-        </MenuItem>
-      ))}
-    </Select>
-  </Control>
-);
+  value: T;
+  options: Record<T, string>;
+  onChange: (val: T) => void;
+}) {
+  return (
+    <Control name={props.name}>
+      <Select
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value as T)}
+        size="small"
+      >
+        ?
+        {Object.entries(props.options).map(([value, label]) => (
+          <MenuItem key={value} value={value}>
+            {label as string}
+          </MenuItem>
+        ))}
+      </Select>
+    </Control>
+  );
+}

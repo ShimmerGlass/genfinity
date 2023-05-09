@@ -29,6 +29,16 @@ func (s *Server) make(rw http.ResponseWriter, r *http.Request) {
 
 		module = bin
 
+	case "frame":
+		frame := cad.Frame{}
+		err := json.NewDecoder(r.Body).Decode(&frame)
+		if err != nil {
+			http.Error(rw, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		module = frame
+
 	default:
 		http.Error(rw, "invalid object type", http.StatusBadRequest)
 		return

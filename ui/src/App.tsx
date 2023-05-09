@@ -2,13 +2,12 @@ import "./App.css";
 import {
   AppBar,
   Box,
-  IconButton,
   Link,
   Toolbar,
   Typography,
   useTheme,
 } from "@mui/material";
-import { MakePage } from "./pages/Make";
+import { MakePage } from "./pages/Make/Make";
 
 function App() {
   const theme = useTheme();

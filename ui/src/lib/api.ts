@@ -15,8 +15,13 @@ export interface BinParams {
   lip: number;
 }
 
-export async function makeBin(params: BinParams) {
-  const res = await fetch("/api/make/bin", {
+export interface FrameParams {
+  size_x: number;
+  size_y: number;
+}
+
+export async function makeModel(type: string, params: any) {
+  const res = await fetch(`/api/make/${type}`, {
     method: "POST",
     body: JSON.stringify(params),
   });
