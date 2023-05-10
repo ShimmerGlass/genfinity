@@ -39,13 +39,13 @@ const Credits = () => {
       })}
     >
       <Typography>
-        Powered by the work of Zack Freedman at{" "}
+        🚀 Powered by Zack Freedman's work at{" "}
         <Link href="https://www.youtube.com/@ZackFreedman" target="_blank">
           VoidStarLab
         </Link>
       </Typography>
       <Typography>
-        And the Gridfinity{" "}
+        ⚙️ And the Gridfinity{" "}
         <Link
           href="https://github.com/kennetek/gridfinity-rebuilt-openscad"
           target="_blank"
@@ -54,7 +54,7 @@ const Credits = () => {
         </Link>{" "}
       </Typography>
       <Typography>
-        Found a bug, have a suggestion ? Issues and PRs are welcome on{" "}
+        🫧 Found a bug, have a suggestion ? Issues and PRs are welcome on{" "}
         <Link href="https://github.com/ShimmerGlass/genfinity">Github</Link>
       </Typography>
     </Box>

@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ControlSection,
   SliderControl,
   SelectControl,
 } from "../../components/Form";
 import { BinParams } from "../../lib/api";
+
+const sizeValueFormat = (unit: number) => (val: number) =>
+  `${val}x (${val * unit}mm)`;
 
 export const BinControls = (props: { onChange: (params: any) => void }) => {
   const [params, setParams] = useState<BinParams>({
@@ -34,6 +37,7 @@ export const BinControls = (props: { onChange: (params: any) => void }) => {
           onChange={(val) =>
             setParams((current) => ({ ...current, size_x: val }))
           }
+          valueFormat={sizeValueFormat(42)}
         />
         <SliderControl
           name="Y"
@@ -44,6 +48,7 @@ export const BinControls = (props: { onChange: (params: any) => void }) => {
           onChange={(val) =>
             setParams((current) => ({ ...current, size_y: val }))
           }
+          valueFormat={sizeValueFormat(42)}
         />
 
         <SliderControl
@@ -55,6 +60,7 @@ export const BinControls = (props: { onChange: (params: any) => void }) => {
           onChange={(val) =>
             setParams((current) => ({ ...current, size_z: val }))
           }
+          valueFormat={sizeValueFormat(7)}
         />
       </ControlSection>
       <ControlSection title="Divisions">
@@ -98,9 +104,9 @@ export const BinControls = (props: { onChange: (params: any) => void }) => {
           name="Lip"
           value={params.lip}
           options={[
-            { value: 0, label: "Regular lip" },
-            { value: 1, label: "remove lip subtractively" },
-            { value: 2, label: "Remove lip and retain height" },
+            { value: 0, label: "Regular" },
+            { value: 1, label: "No lip" },
+            { value: 2, label: "No lip, retain height" },
           ]}
           onChange={(val) => setParams((current) => ({ ...current, lip: val }))}
         />
@@ -113,6 +119,7 @@ export const BinControls = (props: { onChange: (params: any) => void }) => {
           onChange={(val) =>
             setParams((current) => ({ ...current, scoop: val }))
           }
+          valueFormat={(val) => `${val * 100}%`}
         />
       </ControlSection>
     </>

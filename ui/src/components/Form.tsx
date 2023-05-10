@@ -30,19 +30,26 @@ export const ControlSection = (props: {
   );
 };
 
-export const Control = (props: { name: string; children: React.ReactNode }) => (
+export const Control = (props: {
+  name: React.ReactNode;
+  children: React.ReactNode;
+}) => (
   <Box
     sx={(theme) => ({
       display: "flex",
       gap: theme.spacing(2),
       marginBottom: theme.spacing(1),
-      justifyContent: "center",
+      justifyContent: "space-between",
       alignItems: "center",
     })}
   >
-    <Typography id="input-slider" style={{ width: "40%", color: "#333" }}>
-      {props.name}
-    </Typography>
+    {typeof props.name === "string" ? (
+      <Typography style={{ width: "40%", color: "#333" }}>
+        {props.name}
+      </Typography>
+    ) : (
+      props.name
+    )}
     <Box style={{ width: "60%" }}>{props.children}</Box>
   </Box>
 );
@@ -54,6 +61,7 @@ export const SliderControl = (props: {
   max?: number;
   step?: number;
   onChange: (val: number) => void;
+  valueFormat?: (value: number, index: number) => React.ReactNode;
 }) => (
   <Control name={props.name}>
     <Stack direction="row" spacing={2}>
@@ -64,17 +72,18 @@ export const SliderControl = (props: {
         value={props.value}
         onChange={(e, val) => props.onChange(val as number)}
         aria-labelledby="input-slider"
-        style={{ width: "90%" }}
+        style={{ width: "70%" }}
+        valueLabelFormat={props.valueFormat}
       />
-      <Typography style={{ width: "10%", textAlign: "right" }}>
-        {props.value}
+      <Typography style={{ width: "30%", textAlign: "right" }}>
+        {props.valueFormat ? props.valueFormat(props.value, 0) : props.value}
       </Typography>
     </Stack>
   </Control>
 );
 
 export function SelectControl<T extends string | number>(props: {
-  name: string;
+  name: React.ReactNode;
   value: T;
   options: { value: T; label: string }[];
   onChange: (val: T) => void;

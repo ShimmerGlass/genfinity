@@ -1,4 +1,4 @@
-import { Button, styled } from "@mui/material";
+import { Button, Typography, styled } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect, useState } from "react";
 import { StlViewer } from "react-stl-viewer";
@@ -77,7 +77,7 @@ export const MakePage = () => {
       <Grid xs={4}>
         <ControlSection>
           <SelectControl
-            name="Type"
+            name={<Typography variant="h4">Model</Typography>}
             value={modelType}
             options={[
               { value: "bin", label: "Bin" },
