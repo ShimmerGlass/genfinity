@@ -19,7 +19,7 @@ export const FrameControls = (props: { onChange: (params: any) => void }) => {
           name="X"
           value={params.size_x}
           min={1}
-          max={20}
+          max={10}
           step={1}
           onChange={(val) =>
             setParams((current) => ({ ...current, size_x: val }))
@@ -28,7 +28,7 @@ export const FrameControls = (props: { onChange: (params: any) => void }) => {
         <SliderControl
           name="Y"
           min={1}
-          max={20}
+          max={10}
           step={1}
           value={params.size_y}
           onChange={(val) =>
